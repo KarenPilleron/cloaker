@@ -1,23 +1,19 @@
 export default function handler(req, res) {
   const ua = req.headers['user-agent'] || '';
+  const wallet = req.query.wallet || '';
+
   const isBot = /bot|crawl|slurp|spider|facebookexternalhit|WhatsApp|preview/i.test(ua);
 
-  const { wallet } = req.query;
-
-  // Tableau des smartlinks
   const smartlinks = {
-    wallet1: 'https://zeydoo.com/?aff_id=123&sub1=wallet1',
-    wallet2: 'https://zeydoo.com/?aff_id=123&sub1=wallet2',
-    wallet3: 'https://zeydoo.com/?aff_id=123&sub1=wallet3',
-    // Ajoute ici autant de wallets que nécessaire
+    test1: 'https://lfjcx.com/link?z=9521579&var={SOURCE_ID}&ymid={CLICK_ID}'
   };
 
-  const smartlink = smartlinks[wallet] || 'https://zeydoo.com/?aff_id=123'; // par défaut
-
   if (isBot) {
-    res.writeHead(302, { Location: 'https://example.com' }); // page neutre pour bots
+    res.writeHead(302, { Location: 'https://example.com' }); // Page neutre pour bots
+  } else if (wallet in smartlinks) {
+    res.writeHead(302, { Location: smartlinks[wallet] }); // Redirection réelle
   } else {
-    res.writeHead(302, { Location: smartlink }); // redirection vers ton smartlink réel
+    res.writeHead(302, { Location: 'https://google.com' }); // Fallback si mauvais paramètre
   }
 
   res.end();
