@@ -4,17 +4,13 @@ export default function handler(req, res) {
 
   const isBot = /bot|crawl|slurp|spider|facebookexternalhit|WhatsApp|preview/i.test(ua);
 
-  const smartlinks = {
-    test1: 'https://google.com'
+const smartlink = smartlinks[wallet];
 
-  if (isBot) {
-    res.writeHead(302, { Location: 'https://example.com' }); // Page neutre pour bots
-  } else if (wallet in smartlinks) {
-    res.writeHead(302, { Location: smartlinks[wallet] }); // Redirection réelle
-  } else {
-    res.writeHead(302, { Location: 'https://google.com' }); // Fallback si mauvais paramètre
-  }
-
-  res.end();
+if (isBot) {
+  res.writeHead(302, { Location: 'https://example.com' }); // redirection neutre
+} else if (smartlink) {
+  res.writeHead(302, { Location: smartlink }); // redirection réelle
+} else {
+  res.writeHead(302, { Location: 'https://google.com' }); // fallback
 }
-// Trigger rebuild
+res.end();
