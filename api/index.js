@@ -4,13 +4,22 @@ export default function handler(req, res) {
 
   const isBot = /bot|crawl|slurp|spider|facebookexternalhit|WhatsApp|preview/i.test(ua);
 
-const smartlink = smartlinks[wallet];
+  // ✅ Ajoute tes smartlinks ici
+  const smartlinks = {
+    test1: 'https://lfjx.com/link?z=95215796&var={SOURCE_ID}&ymid={CLICK_ID}',
+    // test2: 'https://autre-lien.com',
+    // test3: 'https://encore-un-lien.com',
+  };
 
-if (isBot) {
-  res.writeHead(302, { Location: 'https://example.com' }); // redirection neutre
-} else if (smartlink) {
-  res.writeHead(302, { Location: smartlink }); // redirection réelle
-} else {
-  res.writeHead(302, { Location: 'https://google.com' }); // fallback
+  const smartlink = smartlinks[wallet];
+
+  if (isBot) {
+    res.writeHead(302, { Location: 'https://example.com' }); // redirection neutre
+  } else if (smartlink) {
+    res.writeHead(302, { Location: smartlink }); // redirection réelle
+  } else {
+    res.writeHead(302, { Location: 'https://google.com' }); // fallback
+  }
+
+  res.end();
 }
-res.end();
