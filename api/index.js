@@ -6,7 +6,7 @@ export default function handler(req, res) {
 
   // ✅ Ajoute tes smartlinks ici
   const smartlinks = {
-    test1: 'https://lfjx.com/link?z=95215796&var={SOURCE_ID}&ymid={CLICK_ID}',
+    test1: 'https://google.com',
     // test2: 'https://autre-lien.com',
     // test3: 'https://encore-un-lien.com',
   };
