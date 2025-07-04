@@ -5,8 +5,7 @@ export default function handler(req, res) {
   const isBot = /bot|crawl|slurp|spider|facebookexternalhit|WhatsApp|preview/i.test(ua);
 
   const smartlinks = {
-    test1: 'https://lfjcx.com/link?z=9521579&var={SOURCE_ID}&ymid={CLICK_ID}'
-  };
+    test1: 'https://google.com'
 
   if (isBot) {
     res.writeHead(302, { Location: 'https://example.com' }); // Page neutre pour bots
